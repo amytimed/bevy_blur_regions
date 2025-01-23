@@ -22,12 +22,12 @@ fn main() {
 }
 ```
 
-Add the `BlurRegionsCamera` component to the 3D camera whose output should be blurred:
+Add the `BlurRegionsCamera` component to the camera whose output should be blurred:
 
 ```rust
 commands.spawn((
     BlurRegionsCamera::default(),
-    Camera3dBundle::default(),
+    Camera3d::default(), // or Camera2d
 ));
 ```
 
@@ -54,10 +54,9 @@ When using egui, enable the `egui` feature and then use the `show_with_blur` fun
 ```rust
 fn draw_ui(
     mut contexts: EguiContexts,
-{
+) {
     let frame = egui::Frame::window(&contexts.ctx_mut().style())
         .fill(egui::Color32::from_rgba_premultiplied(27, 27, 27, 100))
-        .rounding(0.0)
         .shadow(egui::epaint::Shadow::NONE);
 
     egui::Window::new("Blurry Window")
@@ -91,6 +90,7 @@ The number of blur regions that can be present on the screen at the same time is
 
 | bevy_blur_regions | bevy | bevy_egui |
 |-------------------|------|-----------|
+| 0.6.0             | 0.15 | 0.32      |
 | 0.5.0             | 0.14 | 0.30      |
 | 0.4.0             | 0.14 | 0.28      |
 | 0.3.0             | 0.14 | 0.28      |
